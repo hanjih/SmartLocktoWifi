@@ -1,6 +1,7 @@
 package com.example.han.smartlocktowifi;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -39,6 +41,17 @@ public class MainActivity extends Activity {
         //        TextView ibtn = (TextView) findViewById(R.id.menu_image);
         //        registerForContextMenu(ibtn);
         //        Toast.makeText(this, "Registered...", Toast.LENGTH_SHORT).show();
+
+
+        TextView wifi1 = (TextView)findViewById(R.id.wifi1);
+        wifi1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentConfirm = new Intent();
+                intentConfirm.setAction("android.settings.WIFI_SETTINGS");
+                startActivity(intentConfirm);
+            }
+        });
     }
 
     @Override
