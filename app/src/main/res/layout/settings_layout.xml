@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+            <TextView
+                android:text="Wifi"
+                android:textSize="80px"
+                android:paddingLeft="30px"
+                android:paddingTop="5px" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="10px"
+                android:paddingLeft="30px"
+                android:paddingTop="90px"
+                android:text="지정된 와이파이 연결 실패시에도 와이파이를 유지"
+                android:textSize="70px" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingBottom="150px"
+                android:paddingLeft="30px"
+                android:paddingTop="10px"
+                android:text="최대 연결시도 시간\n(초과시 연결중단)"
+                android:textSize="70px" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/second" />
+
+            <TextView
+                android:text="초"
+                android:textSize="70px" />
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="알림"
+                android:textSize="80px"
+                android:paddingLeft="30px"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/text3"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="와이파이 연결/미연결시 알림"
+                android:textSize="70px"
+                android:paddingLeft="30px"
+                android:paddingTop="10px"
+                android:paddingBottom="10px"/>
+            <Switch
+                android:id="@+id/switch3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>
