@@ -1,7 +1,11 @@
 package com.example.han.smartlocktowifi;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.SupplicantState;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -13,6 +17,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.han.smartlocktowifi.interfaces.ConnectionResultListener;
+import com.example.han.smartlocktowifi.interfaces.WifiStateListener;
 
 public class MainActivity extends Activity {
 
@@ -186,7 +193,6 @@ public class MainActivity extends Activity {
                     ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
                     String str = ed.getText().toString();
                     tv1.setText(str);
-                    btn_Popup1.setVisibility(View.GONE);
                     tv1.setVisibility(View.VISIBLE);
                     mPopupWindow.dismiss();
                     break;
@@ -197,7 +203,6 @@ public class MainActivity extends Activity {
                     ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
                     String str = ed.getText().toString();
                     tv2.setText(str);
-                    btn_Popup1.setVisibility(View.GONE);
                     tv2.setVisibility(View.VISIBLE);
                     mPopupWindow.dismiss();
                     break;
@@ -208,7 +213,6 @@ public class MainActivity extends Activity {
                     ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
                     String str = ed.getText().toString();
                     tv3.setText(str);
-                    btn_Popup1.setVisibility(View.GONE);
                     tv3.setVisibility(View.VISIBLE);
                     mPopupWindow.dismiss();
                     break;
@@ -220,5 +224,72 @@ public class MainActivity extends Activity {
                 break;
         }
     }
+
+
+    public void wifi_setting(View v){
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        boolean isWifiConn = networkInfo.isConnected();
+        Toast.makeText(getApplicationContext(), "클릭된 팝업 메뉴" + networkInfo, Toast.LENGTH_SHORT).show();
+
+        if(!isWifiConn){
+            // First initializate a WifiConnector object
+            WifiConnector connector = new WifiConnector(this, "NEW_SSID", "NEW_BSSID", "WEP", "wifiPassword");
+            connector.setWifiStateListener(new WifiStateListener() {
+                @Override
+                public void onStateChange(int wifiState) {
+
+                }
+
+                @Override
+                public void onWifiEnabled() {
+                    // here you should be start your network operations
+                }
+
+                @Override
+                public void onWifiEnabling() {
+
+                }
+
+                @Override
+                public void onWifiDisabling() {
+
+                }
+
+                @Override
+                public void onWifiDisabled() {
+
+                }
+            });
+
+            // For connecting to specific wifi network, third parameter (new_bssid) could be null
+            connector.connectToWifi(new ConnectionResultListener() {
+                @Override
+                public void successfulConnect(String SSID) {
+                    // toast!
+                }
+
+                @Override
+                public void errorConnect(int codeReason) {
+                    // toast!
+                }
+
+                @Override
+                public void onStateChange(SupplicantState supplicantState) {
+                    // update UI!
+                }
+            });
+
+            // And do not forget to unregister your wifi state listener on the onStop() or onDestroy() method
+            connector.unregisterWifiStateListener();
+        }
+        else{
+
+        }
+
+    }
+
 
 }
