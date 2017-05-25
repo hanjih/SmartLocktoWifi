@@ -7,14 +7,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,9 +24,9 @@ public class MainActivity extends Activity {
 
     private PopupWindow mPopupWindow;
     private View popupView;
-    private ImageButton btn_Popup1;
-    private ImageButton btn_Popup2;
-    private ImageButton btn_Popup3;
+    private ImageView place_home;
+    private ImageView place_office;
+    private ImageView place_school;
     private int tmp_image;
     private EditText ed;
     private TextView tv_tmp;
@@ -39,9 +38,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_Popup1 = (ImageButton) findViewById(R.id.place_setting1);
-        btn_Popup2 = (ImageButton) findViewById(R.id.place_setting2);
-        btn_Popup3 = (ImageButton) findViewById(R.id.place_setting3);
+        place_home = (ImageView) findViewById(R.id.place_setting1);
+        place_office = (ImageView) findViewById(R.id.place_setting2);
+        place_school = (ImageView) findViewById(R.id.place_setting3);
 
     }
 
@@ -72,158 +71,158 @@ public class MainActivity extends Activity {
         popup.show();
     }
 
-    public void wifi_setting_onclick(View v) {
-        popupView = getLayoutInflater().inflate(R.layout.place_popup_window, null);
-        mPopupWindow = new PopupWindow(popupView,
-                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setAnimationStyle(1);
-        mPopupWindow.setFocusable(true);
-        mPopupWindow.setTouchable(true);
-        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-
-        switch (v.getId()) {
-            case R.id.place_setting1:
-                tmp_image = 1;
-                break;
-            case R.id.place_setting2:
-                tmp_image = 2;
-                break;
-            case R.id.place_setting3:
-                tmp_image = 3;
-                break;
-            case R.id.txtv1:
-                tmp_image = 1;
-                break;
-            case R.id.txtv2:
-                tmp_image = 2;
-                break;
-            case R.id.txtv3:
-                tmp_image = 3;
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void wifi_setting_image(View v) {
-
-        switch (v.getId()) {
-            case R.id.home:
-                if (tmp_image == 1) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv1);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup1.setImageResource(R.drawable.home);
-                    btn_Popup1.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 2) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv2);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup2.setImageResource(R.drawable.home);
-                    btn_Popup2.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 3) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv3);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup3.setImageResource(R.drawable.home);
-                    btn_Popup3.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else
-                    break;
-
-            case R.id.office:
-
-                if (tmp_image == 1) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv1);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup1.setImageResource(R.drawable.office);
-                    btn_Popup1.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 2) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv2);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup2.setImageResource(R.drawable.office);
-                    btn_Popup2.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 3) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv3);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup3.setImageResource(R.drawable.office);
-                    btn_Popup3.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else
-                    break;
-            case R.id.school:
-
-                if (tmp_image == 1) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv1);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup1.setImageResource(R.drawable.school);
-                    btn_Popup1.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 2) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv2);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup2.setImageResource(R.drawable.school);
-                    btn_Popup2.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 3) {
-                    tv_tmp = (TextView) findViewById(R.id.txtv3);
-                    tv_tmp.setVisibility(View.GONE);
-                    btn_Popup3.setImageResource(R.drawable.school);
-                    btn_Popup3.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else
-                    break;
-
-            case R.id.image_to_text:
-
-                if (tmp_image == 1) {
-                    ib_tmp = (ImageButton) findViewById(R.id.place_setting1);
-                    ib_tmp.setVisibility(View.GONE);
-                    TextView tv1 = (TextView) findViewById(R.id.txtv1);
-                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
-                    String str = ed.getText().toString();
-                    tv1.setText(str);
-                    tv1.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 2) {
-                    ib_tmp = (ImageButton) findViewById(R.id.place_setting2);
-                    ib_tmp.setVisibility(View.GONE);
-                    TextView tv2 = (TextView) findViewById(R.id.txtv2);
-                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
-                    String str = ed.getText().toString();
-                    tv2.setText(str);
-                    tv2.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else if (tmp_image == 3) {
-                    ib_tmp = (ImageButton) findViewById(R.id.place_setting3);
-                    ib_tmp.setVisibility(View.GONE);
-                    TextView tv3 = (TextView) findViewById(R.id.txtv3);
-                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
-                    String str = ed.getText().toString();
-                    tv3.setText(str);
-                    tv3.setVisibility(View.VISIBLE);
-                    mPopupWindow.dismiss();
-                    break;
-                } else
-                    mPopupWindow.dismiss();
-                break;
-
-            default:
-                break;
-        }
-    }
+//    public void wifi_setting_onclick(View v) {
+//        popupView = getLayoutInflater().inflate(R.layout.place_popup_window, null);
+//        mPopupWindow = new PopupWindow(popupView,
+//                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+//        mPopupWindow.setAnimationStyle(1);
+//        mPopupWindow.setFocusable(true);
+//        mPopupWindow.setTouchable(true);
+//        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+//
+//        switch (v.getId()) {
+//            case R.id.place_setting1:
+//                tmp_image = 1;
+//                break;
+//            case R.id.place_setting2:
+//                tmp_image = 2;
+//                break;
+//            case R.id.place_setting3:
+//                tmp_image = 3;
+//                break;
+//            case R.id.txtv1:
+//                tmp_image = 1;
+//                break;
+//            case R.id.txtv2:
+//                tmp_image = 2;
+//                break;
+//            case R.id.txtv3:
+//                tmp_image = 3;
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//
+//    public void wifi_setting_image(View v) {
+//
+//        switch (v.getId()) {
+//            case R.id.home:
+//                if (tmp_image == 1) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv1);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_home.setImageResource(R.drawable.home);
+//                    place_home.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 2) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv2);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_office.setImageResource(R.drawable.home);
+//                    place_office.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 3) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv3);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_school.setImageResource(R.drawable.home);
+//                    place_school.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else
+//                    break;
+//
+//            case R.id.office:
+//
+//                if (tmp_image == 1) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv1);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_home.setImageResource(R.drawable.office);
+//                    place_home.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 2) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv2);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_office.setImageResource(R.drawable.office);
+//                    place_office.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 3) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv3);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_school.setImageResource(R.drawable.office);
+//                    place_school.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else
+//                    break;
+//            case R.id.school:
+//
+//                if (tmp_image == 1) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv1);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_home.setImageResource(R.drawable.school);
+//                    place_home.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 2) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv2);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_office.setImageResource(R.drawable.school);
+//                    place_office.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 3) {
+//                    tv_tmp = (TextView) findViewById(R.id.txtv3);
+//                    tv_tmp.setVisibility(View.GONE);
+//                    place_school.setImageResource(R.drawable.school);
+//                    place_school.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else
+//                    break;
+//
+//            case R.id.image_to_text:
+//
+//                if (tmp_image == 1) {
+//                    ib_tmp = (ImageButton) findViewById(R.id.place_setting1);
+//                    ib_tmp.setVisibility(View.GONE);
+//                    TextView tv1 = (TextView) findViewById(R.id.txtv1);
+//                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
+//                    String str = ed.getText().toString();
+//                    tv1.setText(str);
+//                    tv1.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 2) {
+//                    ib_tmp = (ImageButton) findViewById(R.id.place_setting2);
+//                    ib_tmp.setVisibility(View.GONE);
+//                    TextView tv2 = (TextView) findViewById(R.id.txtv2);
+//                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
+//                    String str = ed.getText().toString();
+//                    tv2.setText(str);
+//                    tv2.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else if (tmp_image == 3) {
+//                    ib_tmp = (ImageButton) findViewById(R.id.place_setting3);
+//                    ib_tmp.setVisibility(View.GONE);
+//                    TextView tv3 = (TextView) findViewById(R.id.txtv3);
+//                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
+//                    String str = ed.getText().toString();
+//                    tv3.setText(str);
+//                    tv3.setVisibility(View.VISIBLE);
+//                    mPopupWindow.dismiss();
+//                    break;
+//                } else
+//                    mPopupWindow.dismiss();
+//                break;
+//
+//            default:
+//                break;
+//        }
+//    }
 
 
     public void wifi_setting(View v){
