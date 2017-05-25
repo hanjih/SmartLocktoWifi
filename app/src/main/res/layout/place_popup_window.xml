@@ -13,7 +13,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
-            android:background="@drawable/main_background_below"
+            android:background="@drawable/main_background"
             android:orientation="vertical"
             android:weightSum="2">
 
@@ -27,21 +27,25 @@
                 android:weightSum="2">
 
                 <ImageButton
+                    android:id="@+id/home"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:scaleType="centerInside"
+                    android:onClick="wifi_setting_image"
                     android:src="@drawable/home" />
 
                 <ImageButton
+                    android:id="@+id/office"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:scaleType="centerInside"
+                    android:onClick="wifi_setting_image"
                     android:src="@drawable/office" />
 
             </LinearLayout>
@@ -56,12 +60,14 @@
                 android:weightSum="2">
 
                 <ImageButton
+                    android:id="@+id/school"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_margin="10dp"
                     android:background="#00000000"
                     android:scaleType="centerInside"
+                    android:onClick="wifi_setting_image"
                     android:src="@drawable/school" />
 
                 <LinearLayout
@@ -73,6 +79,7 @@
                     android:weightSum="2">
 
                     <EditText
+                        android:id="@+id/image_to_textedit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
@@ -83,11 +90,13 @@
                         android:scaleType="centerInside" />
 
                     <Button
+                        android:id="@+id/image_to_text"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:onClick="wifi_setting_image"
                         android:text="확인" />
                 </LinearLayout>
 
