@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
             //LinearLayout 정의된거 add
             dynamicll.addView(ll);
         }
+    }
 
 //        preview.setLayoutParams(params);
 //
@@ -97,7 +98,7 @@ public class MainActivity extends Activity {
 //
 //        preView.addView(preview,0); //0은 맨 뒤로 보낸다는 소리다.
 
-    }
+
 
 
 
