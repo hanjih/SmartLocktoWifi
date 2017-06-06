@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/main_background"
+    tools:ignore="contentDescription"
     tools:context="com.example.han.smartlocktowifi.MainActivity">
 
     <android.support.constraint.ConstraintLayout
@@ -55,7 +56,7 @@
                 android:layout_weight="2"
                 android:gravity="center_horizontal"
                 android:text="장소"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,7 +64,7 @@
                 android:layout_weight="3"
                 android:gravity="center_horizontal"
                 android:text="와이파이"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="연결횟수"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
@@ -81,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="와이파이를 설정해주세요" />
+        android:text="@string/Set_wifi" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -120,22 +121,13 @@
                     android:scaleType="fitStart"
                     android:src="@drawable/home" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/txtv1"-->
-                    <!--android:layout_width="50dp"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:layout_margin="10dp"-->
-                    <!--android:layout_weight="2"-->
-                    <!--android:background="#00000000"-->
-                    <!--android:onClick="wifi_setting_onclick"-->
-                    <!--android:scaleType="fitStart"-->
-                    <!--android:visibility="gone" />-->
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="와이파이를 설정해주세요" />
+                    android:text="@string/Set_wifi" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -168,7 +160,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="와이파이를 설정해주세요" />
+                    android:text="@string/Set_wifi"  />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -202,7 +194,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="와이파이를 설정해주세요" />
+                    android:text="@string/Set_wifi"  />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -211,27 +203,128 @@
                     android:text="0" />
             </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/dynamicll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:weightSum="6">
-
-            <Button
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/list_layout4"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/addbtn"
-                android:text="추가"/>
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txtv1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+
+                    android:scaleType="fitStart"
+                    android:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/place_setting4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.11"
+                    android:background="#00000000"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/school"
+                    android:onClick="wifi_setting_onClick"/>
+
+                <TextView
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/Set_wifi"/>
+
+                <TextView
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/list_layout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="6"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/txtv2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+
+                    android:scaleType="fitStart"
+                    android:visibility="gone" />
+
+                <ImageButton
+                    android:id="@+id/place_setting5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="2"
+                    android:background="#00000000"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/school"
+                    android:onClick="wifi_setting_onClick"/>
+
+                <TextView
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/Set_wifi"  />
 
 
+                <TextView
+                    android:layout_marginLeft="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/list_layout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/addbtn"
+                    android:text="추가"/>
+
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/delbtn"
+                    android:text="삭제"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-
-
     </ScrollView>
-
 </LinearLayout>

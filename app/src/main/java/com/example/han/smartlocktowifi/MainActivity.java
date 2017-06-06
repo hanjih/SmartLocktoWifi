@@ -7,16 +7,16 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.SupplicantState;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,78 +27,70 @@ public class MainActivity extends Activity {
 
     private PopupWindow mPopupWindow;
     private View popupView;
-    private ImageView place_setting1;
-    private ImageView place_setting2;
-    private ImageView place_setting3;
     private int tmp_image;
     private EditText ed;
     private TextView tv_tmp;
-    private ImageButton ib_tmp;
+//    private ImageView place_setting1,place_setting2,place_setting3;
+    private ImageButton ib_tmp,place_setting4,place_setting5;
     private Intent intent;
+    LinearLayout list_layout4;
+    LinearLayout list_layout5;
+    LinearLayout list_layout6;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        place_setting1 = (ImageView) findViewById(R.id.place_setting1);
-        place_setting2 = (ImageView) findViewById(R.id.place_setting2);
-        place_setting3 = (ImageView) findViewById(R.id.place_setting3);
-        final LinearLayout dynamicll = (LinearLayout) findViewById(R.id.dynamicll);
-
-        // linearLayout params 정의
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-        for (int j = 0; j <= 5; j++) {
-            // LinearLayout 생성
-            LinearLayout ll = new LinearLayout(this);
-            ll.setOrientation(LinearLayout.HORIZONTAL);
-
-            // TextView 생성
-            TextView tv1 = new TextView(this);
-            tv1.setText("edit");
-            ll.addView(tv1);
-
-            // TextView 생성
-            TextView tvProdc = new TextView(this);
-            tvProdc.setText("와이파이를 설정해주세요");
-            ll.addView(tvProdc);
-
-            // TextView 생성
-            TextView tvAge = new TextView(this);
-            tvAge.setText("0");
-            ll.addView(tvAge);
 
 
-            final Button addbtn = (Button) findViewById(R.id.addbtn);
-            // setId 버튼에 대한 키값
-            addbtn.setId(j + 1);
-            addbtn.setLayoutParams(params);
+//        place_setting1 = (ImageView) findViewById(R.id.place_setting1);
+//        place_setting2 = (ImageView) findViewById(R.id.place_setting2);
+//        place_setting3 = (ImageView) findViewById(R.id.place_setting3);
+        place_setting4 = (ImageButton) findViewById(R.id.place_setting4);
+        place_setting5 = (ImageButton) findViewById(R.id.place_setting5);
+        list_layout4 = (LinearLayout)findViewById(R.id.list_layout4);
+        list_layout5 = (LinearLayout)findViewById(R.id.list_layout5);
+        list_layout6 = (LinearLayout)findViewById(R.id.list_layout6);
 
-            final int position = j;
+        Button addbtn = (Button) findViewById(R.id.addbtn);
+        Button delbtn = (Button) findViewById(R.id.delbtn);
+        addbtn.setOnClickListener(new View.OnClickListener() {
 
-            addbtn.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Log.d("log", "position :" + position);
-                    Toast.makeText(getApplicationContext(), "클릭한 position:" + position, Toast.LENGTH_LONG).show();
+            @Override
+            public void onClick(View v) {
+                switch (list_layout4.getVisibility()) {
+                    case View.GONE:
+                        list_layout4.setVisibility(View.VISIBLE);
+                        break;
+                    case View.VISIBLE:
+                        list_layout5.setVisibility(View.VISIBLE);
+                        list_layout6.setVisibility(View.VISIBLE);
+
+                        switch (list_layout5.getVisibility()) {
+                            case View.VISIBLE:
+                                Toast.makeText(getApplicationContext(),"최대 2곳 추가 가능합니다",Toast.LENGTH_SHORT).show();
+                                list_layout6.setVisibility(View.VISIBLE);
+                        }
                 }
-            });
+            }
+        });
 
-            //버튼 add
-            //ll.addView(btn);
-            //LinearLayout 정의된거 add
-            dynamicll.addView(ll);
-        }
-
-//        preview.setLayoutParams(params);
-//
-//        preView.setGravity(Gravity.CENTER);
-//
-//        preView.addView(preview,0); //0은 맨 뒤로 보낸다는 소리다.
-
+        delbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                switch (list_layout5.getVisibility()){
+                    case View.VISIBLE:
+                        list_layout5.setVisibility(View.GONE);
+                        break;
+                    case View.GONE:
+                        list_layout4.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        });
     }
-
 
 
     public void menu_open(View v) {
@@ -113,7 +105,6 @@ public class MainActivity extends Activity {
                                 startActivity(intent);
                                 break;
                             case R.id.menu_help:
-
                                 break;
                             case R.id.menu_info:
                                 intent = new Intent(MainActivity.this, InfomationActivity.class);
@@ -127,158 +118,121 @@ public class MainActivity extends Activity {
         popup.show();
     }
 
-//    public void wifi_setting_onclick(View v) {
-//        popupView = getLayoutInflater().inflate(R.layout.place_popup_window, null);
-//        mPopupWindow = new PopupWindow(popupView,
-//                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        mPopupWindow.setAnimationStyle(1);
-//        mPopupWindow.setFocusable(true);
-//        mPopupWindow.setTouchable(true);
-//        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
-//
-//        switch (v.getId()) {
-//            case R.id.place_setting1:
-//                tmp_image = 1;
-//                break;
-//            case R.id.place_setting2:
-//                tmp_image = 2;
-//                break;
-//            case R.id.place_setting3:
-//                tmp_image = 3;
-//                break;
-//            case R.id.txtv1:
-//                tmp_image = 1;
-//                break;
-//            case R.id.txtv2:
-//                tmp_image = 2;
-//                break;
-//            case R.id.txtv3:
-//                tmp_image = 3;
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//
-//    public void wifi_setting_image(View v) {
-//
-//        switch (v.getId()) {
-//            case R.id.home:
-//                if (tmp_image == 1) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv1);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting1.setImageResource(R.drawable.home);
-//                    place_setting1.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 2) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv2);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting2.setImageResource(R.drawable.home);
-//                    place_setting2.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 3) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv3);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting3.setImageResource(R.drawable.home);
-//                    place_setting3.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else
-//                    break;
-//
-//            case R.id.office:
-//
-//                if (tmp_image == 1) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv1);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting1.setImageResource(R.drawable.office);
-//                    place_setting1.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 2) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv2);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting2.setImageResource(R.drawable.office);
-//                    place_setting2.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 3) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv3);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting3.setImageResource(R.drawable.office);
-//                    place_setting3.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else
-//                    break;
-//            case R.id.school:
-//
-//                if (tmp_image == 1) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv1);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting1.setImageResource(R.drawable.school);
-//                    place_setting1.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 2) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv2);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting2.setImageResource(R.drawable.school);
-//                    place_setting2.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 3) {
-//                    tv_tmp = (TextView) findViewById(R.id.txtv3);
-//                    tv_tmp.setVisibility(View.GONE);
-//                    place_setting3.setImageResource(R.drawable.school);
-//                    place_setting3.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else
-//                    break;
-//
-//            case R.id.image_to_text:
-//
-//                if (tmp_image == 1) {
-//                    ib_tmp = (ImageButton) findViewById(R.id.place_setting1);
-//                    ib_tmp.setVisibility(View.GONE);
-//                    TextView tv1 = (TextView) findViewById(R.id.txtv1);
-//                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
-//                    String str = ed.getText().toString();
-//                    tv1.setText(str);
-//                    tv1.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 2) {
-//                    ib_tmp = (ImageButton) findViewById(R.id.place_setting2);
-//                    ib_tmp.setVisibility(View.GONE);
-//                    TextView tv2 = (TextView) findViewById(R.id.txtv2);
-//                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
-//                    String str = ed.getText().toString();
-//                    tv2.setText(str);
-//                    tv2.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else if (tmp_image == 3) {
-//                    ib_tmp = (ImageButton) findViewById(R.id.place_setting3);
-//                    ib_tmp.setVisibility(View.GONE);
-//                    TextView tv3 = (TextView) findViewById(R.id.txtv3);
-//                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
-//                    String str = ed.getText().toString();
-//                    tv3.setText(str);
-//                    tv3.setVisibility(View.VISIBLE);
-//                    mPopupWindow.dismiss();
-//                    break;
-//                } else
-//                    mPopupWindow.dismiss();
-//                break;
-//
-//            default:
-//                break;
-//        }
-//    }
+    public void wifi_setting_onClick(View v) {
+        popupView = getLayoutInflater().inflate(R.layout.place_popup_window, null);
+        mPopupWindow = new PopupWindow(popupView,
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setAnimationStyle(1);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+
+        switch (v.getId()) {
+            case R.id.place_setting4:
+                tmp_image = 1;
+                break;
+            case R.id.place_setting5:
+                tmp_image = 2;
+                break;
+            case R.id.txtv1:
+                tmp_image = 1;
+                break;
+            case R.id.txtv2:
+                tmp_image = 2;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void wifi_setting_image(View v) {
+
+        switch (v.getId()) {
+            case R.id.home:
+                if (tmp_image == 1) {
+                    tv_tmp = (TextView) findViewById(R.id.txtv1);
+                    tv_tmp.setVisibility(View.GONE);
+                    place_setting4.setImageResource(R.drawable.home);
+                    place_setting4.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else if (tmp_image == 2) {
+                    tv_tmp = (TextView) findViewById(R.id.txtv2);
+                    tv_tmp.setVisibility(View.GONE);
+                    place_setting5.setImageResource(R.drawable.home);
+                    place_setting5.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else
+                    break;
+
+            case R.id.office:
+
+                if (tmp_image == 1) {
+                    tv_tmp = (TextView) findViewById(R.id.txtv1);
+                    tv_tmp.setVisibility(View.GONE);
+                    place_setting4.setImageResource(R.drawable.office);
+                    place_setting4.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else if (tmp_image == 2) {
+                    tv_tmp = (TextView) findViewById(R.id.txtv2);
+                    tv_tmp.setVisibility(View.GONE);
+                    place_setting5.setImageResource(R.drawable.office);
+                    place_setting5.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else
+                    break;
+            case R.id.school:
+
+                if (tmp_image == 1) {
+                    tv_tmp = (TextView) findViewById(R.id.txtv1);
+                    tv_tmp.setVisibility(View.GONE);
+                    place_setting4.setImageResource(R.drawable.school);
+                    place_setting4.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else if (tmp_image == 2) {
+                    tv_tmp = (TextView) findViewById(R.id.txtv2);
+                    tv_tmp.setVisibility(View.GONE);
+                    place_setting5.setImageResource(R.drawable.school);
+                    place_setting5.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else
+                    break;
+
+            case R.id.image_to_text:
+
+                if (tmp_image == 1) {
+                    ib_tmp = (ImageButton) findViewById(R.id.place_setting4);
+                    ib_tmp.setVisibility(View.GONE);
+                    TextView tv1 = (TextView) findViewById(R.id.txtv1);
+                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
+                    String str = ed.getText().toString();
+                    tv1.setText(str);
+                    tv1.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else if (tmp_image == 2) {
+                    ib_tmp = (ImageButton) findViewById(R.id.place_setting5);
+                    ib_tmp.setVisibility(View.GONE);
+                    TextView tv2 = (TextView) findViewById(R.id.txtv2);
+                    ed = (EditText) popupView.findViewById(R.id.image_to_textedit);
+                    String str = ed.getText().toString();
+                    tv2.setText(str);
+                    tv2.setVisibility(View.VISIBLE);
+                    mPopupWindow.dismiss();
+                    break;
+                } else
+                    mPopupWindow.dismiss();
+                break;
+
+            default:
+                break;
+        }
+    }
 
 
     public void wifi_setting(View v){
