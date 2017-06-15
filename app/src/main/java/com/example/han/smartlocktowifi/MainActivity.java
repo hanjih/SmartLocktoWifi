@@ -29,13 +29,12 @@ public class MainActivity extends Activity {
     private View popupView;
     private int tmp_image;
     private EditText ed;
-    private TextView tv_tmp;
-//    private ImageView place_setting1,place_setting2,place_setting3;
+    private TextView tv_tmp, TextLong, TextLat;
     private ImageButton ib_tmp,place_setting4,place_setting5;
     private Intent intent;
     LinearLayout list_layout4;
     LinearLayout list_layout5;
-    LinearLayout list_layout6;
+
 
 
     @Override
@@ -45,14 +44,16 @@ public class MainActivity extends Activity {
 
 
 
-//        place_setting1 = (ImageView) findViewById(R.id.place_setting1);
-//        place_setting2 = (ImageView) findViewById(R.id.place_setting2);
-//        place_setting3 = (ImageView) findViewById(R.id.place_setting3);
+
+
+
+        TextLong = (TextView)findViewById(R.id.longitude);
+        TextLat = (TextView)findViewById(R.id.latitude);
         place_setting4 = (ImageButton) findViewById(R.id.place_setting4);
         place_setting5 = (ImageButton) findViewById(R.id.place_setting5);
         list_layout4 = (LinearLayout)findViewById(R.id.list_layout4);
         list_layout5 = (LinearLayout)findViewById(R.id.list_layout5);
-        list_layout6 = (LinearLayout)findViewById(R.id.list_layout6);
+
 
         Button addbtn = (Button) findViewById(R.id.addbtn);
         Button delbtn = (Button) findViewById(R.id.delbtn);
@@ -66,12 +67,11 @@ public class MainActivity extends Activity {
                         break;
                     case View.VISIBLE:
                         list_layout5.setVisibility(View.VISIBLE);
-                        list_layout6.setVisibility(View.VISIBLE);
+
 
                         switch (list_layout5.getVisibility()) {
                             case View.VISIBLE:
                                 Toast.makeText(getApplicationContext(),"최대 2곳 추가 가능합니다",Toast.LENGTH_SHORT).show();
-                                list_layout6.setVisibility(View.VISIBLE);
                         }
                 }
             }
@@ -118,6 +118,7 @@ public class MainActivity extends Activity {
         popup.show();
     }
 
+    //장소 이미지클릭시 변경
     public void wifi_setting_onClick(View v) {
         popupView = getLayoutInflater().inflate(R.layout.place_popup_window, null);
         mPopupWindow = new PopupWindow(popupView,
@@ -144,7 +145,7 @@ public class MainActivity extends Activity {
                 break;
         }
     }
-
+    //장소 이미지클릭시 변경
     public void wifi_setting_image(View v) {
 
         switch (v.getId()) {
@@ -234,7 +235,7 @@ public class MainActivity extends Activity {
         }
     }
 
-
+    //와이파이 설정창
     public void wifi_setting(View v){
 
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -299,6 +300,19 @@ public class MainActivity extends Activity {
         }
 
     }
+
+    //GPS 이미지 클릭시 보여주는 창
+    public void gps_setting(View v) {
+        popupView = getLayoutInflater().inflate(R.layout.gps_popup, null);
+        mPopupWindow = new PopupWindow(popupView,
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setAnimationStyle(1);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+    }
+
+
 
 
 }
